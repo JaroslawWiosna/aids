@@ -1079,7 +1079,7 @@ namespace aids
     ////////////////////////////////////////////////////////////
 
     // NOTE: stolen from http://www.cse.yorku.ca/~oz/hash.html
-    unsigned long hash(String_View str)
+    constexpr unsigned long hash(String_View str)
     {
         unsigned long hash = 5381;
         for (size_t i = 0; i < str.count; ++i) {
@@ -1096,6 +1096,7 @@ namespace aids
             Key key;
             Value value;
         };
+        static_assert(hash(Key{}), "hash function for argument Key is not implemented");
 
         Maybe<Bucket> *buckets;
         size_t capacity;
