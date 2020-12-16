@@ -1079,7 +1079,7 @@ namespace aids
     ////////////////////////////////////////////////////////////
 
     // NOTE: stolen from http://www.cse.yorku.ca/~oz/hash.html
-    constexpr unsigned long hash(String_View str)
+    unsigned long hash(String_View str)
     {
         unsigned long hash = 5381;
         for (size_t i = 0; i < str.count; ++i) {
