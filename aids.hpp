@@ -1088,6 +1088,19 @@ namespace aids
         return hash;
     }
 
+    template <typename... Xs>
+    using void_t = void;
+
+    template <typename T, typename = void>
+    struct have_hash_function {
+        static constexpr bool value = false;
+    };
+
+    template <typename T>
+    struct have_hash_function<T, void_t<decltype(hash(T{}))>> {
+        static constexpr bool value = true;
+    };
+
     template <typename Key, typename Value>
     struct Hash_Map
     {
@@ -1096,7 +1109,7 @@ namespace aids
             Key key;
             Value value;
         };
-        static_assert(hash(Key{}), "hash function for argument Key is not implemented");
+        static_assert(have_hash_function<Key>::value, "no hasher for type");
 
         Maybe<Bucket> *buckets;
         size_t capacity;
