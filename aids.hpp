@@ -217,6 +217,7 @@ namespace aids
             return (has_value ? unwrap : t);
         }
     };
+    // clang-format off
 
 #define unwrap_into(lvalue, maybe)              \
     do {                                        \
@@ -224,6 +225,8 @@ namespace aids
         if (!maybe_var.has_value) return {};    \
         (lvalue) = maybe_var.unwrap;            \
     } while (0)
+
+    // clang-format on
 
     ////////////////////////////////////////////////////////////
     // STRING_VIEW
